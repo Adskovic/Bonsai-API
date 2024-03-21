@@ -1,5 +1,5 @@
-from flask import Blueprint, jsonify
-from models import Bonsai, BonsaiOwner
+from flask import Blueprint, jsonify, request
+from models import Bonsai, BonsaiOwner, db
 
 api = Blueprint('api', __name__)
 
@@ -12,6 +12,15 @@ def get_all_bonsai():
 # HTTP GET - Read Record
 
 # HTTP POST - Create Record
+
+@api.route('/bonsai', methods=['POST'])
+def add_bonsai():
+    data = request.get_json()
+    new_bonsai = Bonsai(name=data['name'], species=data['species'])
+    db.session.add(new_bonsai)
+    db.session.commit()
+    return jsonify({'message': 'Bonsai added successfully!'}), 201
+
 
 # HTTP PUT/PATCH - Update Record
 
