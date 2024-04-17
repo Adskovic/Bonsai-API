@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request
-from models import Bonsai, BonsaiOwner, db
+from models import Bonsai, User, db
 
 api = Blueprint('api', __name__)
 
