@@ -2,6 +2,8 @@ from flask import Flask
 from config import Config
 from models import db
 from routes import api
+from seed import db_seed
+
 
 def create_app():
     app = Flask(__name__)
@@ -18,4 +20,5 @@ def create_app():
 
 if __name__ == "__main__":
     app = create_app()
+    db_seed()
     app.run(debug=True)
