@@ -3,7 +3,6 @@ from models import Bonsai, User, db
 
 api = Blueprint('api', __name__)
 
-
 @api.route('/bonsai')
 def get_all_bonsai():
     bonsai_list = Bonsai.query.all()
