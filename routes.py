@@ -38,15 +38,26 @@ def search_bonsai():
 
 
 # HTTP POST - Create Record
-#TODO: Fix this route
-# NOT WORKING PROPERLY YET
-@api.route('/bonsai/add', methods=['POST'])  
+
+@api.route('/add_bonsai', methods=['POST'])  
 def add_bonsai():
-    data = request.get_json()
-    new_bonsai = Bonsai(name=data['name'], species=data['species'], tree_type=data['tree_type'], origin=data['origin'])
-    db.session.add(new_bonsai)
-    db.session.commit()
-    return jsonify({'message': 'Bonsai added successfully!'}), 201
+    name = request.form['name']
+    test = Bonsai.query.filter_by(name=name).first()
+    if test:
+        return jsonify({'message': 'There is already a bonsai with this name.'}), 409
+    else:
+        species=request.form['species']
+        tree_type=request.form['tree_type']
+        origin=request.form['origin']
+
+        new_bonsai = Bonsai(name=name, 
+                            species=species, 
+                            tree_type=tree_type, 
+                            origin=origin
+                            )
+        db.session.add(new_bonsai)
+        db.session.commit()
+        return jsonify({'message': 'You added new bonsai tree.'}), 201
 
 
 # HTTP PUT/PATCH - Update Record
