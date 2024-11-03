@@ -3,6 +3,34 @@ from models import Bonsai, User, db
 
 api = Blueprint('api', __name__)
 
+
+# User authentication routes
+
+@api.route('/signup', methods=['POST'])
+def signup():
+    data = request.get_json()
+    name = data.get('name')
+    email = data.get('email')
+    password = data.get('password')
+
+    if User.query.filter_by(email-email).first():
+        return jsonify({'message': 'User already exist'}), 409
+    
+    new_user = User(name=name, email=email)
+    new_user.set_password(password)
+    db.session.add(new_user)
+    db.session.commit()
+
+    return jsonify({'message': 'User registered sucessfully'}), 201
+
+
+#TODO: Add login route with access token
+@api.route('/login', methods=['POST'])
+def login():
+    pass
+
+
+
 # HTTP GET - Read Record
 
 @api.route('/bonsai', methods=['GET'])

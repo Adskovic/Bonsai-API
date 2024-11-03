@@ -3,6 +3,7 @@ from config import Config
 from models import db
 from routes import api
 from seed import seed
+from flask_jwt_extended import JWTManager
 
 
 def create_app():
@@ -12,6 +13,8 @@ def create_app():
     db.init_app(app)
     app.register_blueprint(api)
     app.register_blueprint(seed)
+
+    jwt = JWTManager(app)
 
     # Creating tables in DB
     with app.app_context():
