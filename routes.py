@@ -1,5 +1,6 @@
 from flask import Blueprint, jsonify, request
 from models import Bonsai, User, db
+from flask_jwt_extended import create_access_token, jwt_required
 
 api = Blueprint('api', __name__)
 
@@ -13,7 +14,7 @@ def signup():
     email = data.get('email')
     password = data.get('password')
 
-    if User.query.filter_by(email-email).first():
+    if User.query.filter_by(email=email).first():
         return jsonify({'message': 'User already exist'}), 409
     
     new_user = User(name=name, email=email)
@@ -24,10 +25,20 @@ def signup():
     return jsonify({'message': 'User registered sucessfully'}), 201
 
 
-#TODO: Add login route with access token
+
 @api.route('/login', methods=['POST'])
 def login():
-    pass
+    data = request.get_json()
+    email = data.get('email')
+    password = data.get('password')
+
+    user = User.query.filter_by(email=email).first()
+    if user and user.check_password(password):
+        access_token = create_access_token(identity=user.id)
+        return jsonify({'access_token': access_token}), 200
+    else:
+        return jsonify({'message': 'Invalid credentials'}), 401
+
 
 
 
@@ -68,7 +79,8 @@ def search_bonsai():
 
 # HTTP POST - Create Record
 
-@api.route('/add_bonsai', methods=['POST'])  
+@api.route('/add_bonsai', methods=['POST'])
+@jwt_required()
 def add_bonsai():
     data = request.get_json()  # Parse JSON from the request body
 
