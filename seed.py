@@ -28,6 +28,78 @@ def db_seed_bonsai():
             origin="China"
                             )
         
+        chinese_elm = Bonsai(
+            name="Chinese elm",
+            species="Ulmus parviflora",
+            tree_type="Sub-tropical",
+            origin="China"
+                            )
+        
+        japanese_elm = Bonsai(
+            name="Japanese elm",
+            species="Zelkova",
+            tree_type="Sub-tropical",
+            origin="Japan"
+                            )
+        
+        european_oak = Bonsai(
+            name="European Oak",
+            species="Quercus robur",
+            tree_type="Deciduous",
+            origin="Europe"
+                            )
+        
+        american_white_oak = Bonsai(
+            name="American White Oak",
+            species="Quercus alba",
+            tree_type="Deciduous",
+            origin="North America"
+                            )
+        
+        ficus = Bonsai(
+            name="Ficus retusa",
+            species="Ficus retusa",
+            tree_type="Tropical",
+            origin="Indonesia"
+                            )
+        
+        chinese_juniper = Bonsai(
+            name="Chinese Juniper",
+            species="Juniperus Chinensis",
+            tree_type="Coniferous",
+            origin="China"
+                            )
+        
+        japanese_shimpaku = Bonsai(
+            name="Japanese Shimpaku Juniper",
+            species="Juniperus sargentii",
+            tree_type="Coniferous",
+            origin="Japan"
+                            )
+        
+        rocky_mountain_juniper = Bonsai(
+            name="Rocky Mountain Juniper",
+            species="Juniperus scopulorum",
+            tree_type="Coniferous",
+            origin="America"
+                            )
+
+        common_juniper = Bonsai(
+            name="Common Juniper",
+            species="Juniperus communis",
+            tree_type="Coniferous",
+            origin="Europe"
+                            )
+        
+        fukien_tea = Bonsai(
+            name="Fukien Tea",
+            species="Carmona Retusa",
+            tree_type="Sub-tropical",
+            origin="China"
+                            )
+
+    #TODO: Add some Pines, Spruce, Redwood, Cherry etc.
+        
 
         db.session.add(japanese_maple)
         db.session.add(chinese_sweet_plum)
