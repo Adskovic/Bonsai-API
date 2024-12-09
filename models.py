@@ -11,13 +11,15 @@ class Bonsai(db.Model):
     species = db.Column(db.String(100))
     tree_type = db.Column(db.String(100))
     origin = db.Column(db.String(100))
+    skill_level = db.Column(db.String(100))
 
     def to_dict(self):
         return {
             "name": self.name,
             "species": self.species,
             "tree_type": self.tree_type,
-            "origin": self.origin
+            "origin": self.origin,
+            "skill_level": self.skill_level
         }
 
 
